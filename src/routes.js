@@ -4,5 +4,6 @@ const router = express.Router();
 const carroController = require('./controllers/carro-controller')
 
 router.get('/carros', carroController.getAllCars)
+router.get('/carros/:id', carroController.findCarById)
 
 module.exports = router;

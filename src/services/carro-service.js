@@ -5,4 +5,8 @@ const getAllCars = () => {
     return carroRepository.getAllCars();    
 }
 
-module.exports = { getAllCars };
+const findCarById = (id) => {
+    return carroRepository.findCarById(id)
+}
+
+module.exports = { getAllCars, findCarById };
