@@ -37,5 +37,9 @@ const updateById = (carro) => {
     return _query('UPDATE carro SET marca = ?, modelo = ?, placa = ? WHERE id_carro = ?', params)
 }
 
-module.exports = { getAllCars, findCarById, saveCar, updateById };
+const deleteById = (id) => {
+    return _query('DELETE FROM carro WHERE id_carro = ?', [id])
+}
+
+module.exports = { getAllCars, findCarById, saveCar, updateById, deleteById };
 

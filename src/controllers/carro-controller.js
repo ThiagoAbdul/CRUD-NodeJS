@@ -45,6 +45,7 @@ const saveCar = async (req, res) => {
         res.statusCode = 400
         res.json({error: 'Campos não enviados'})
     }
+    res.json({})
 }
 
 const updateById = async (req, res) => {
@@ -69,4 +70,25 @@ const updateById = async (req, res) => {
     res.json(json)
 }
 
-module.exports = { getAllCars, findCarById, saveCar, updateById }
+const deleteById = async (req, res) => {
+    const json = {error: ''}
+    const id = req.params.id;
+    if(carroService.isValidId(id)){
+        try{
+            await carroService.deleteById(id)
+            res.statusCode = 204
+        }
+        catch(error){
+            json.error = 'Erro na operação'
+            res.statusCode = 400   
+        }
+    }
+    else{
+        json.error = 'Id inválido'
+        res.statusCode = 400
+    }
+    res.json(json)
+    
+}
+
+module.exports = { getAllCars, findCarById, saveCar, updateById, deleteById }
