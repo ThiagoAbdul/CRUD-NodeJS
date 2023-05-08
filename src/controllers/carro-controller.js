@@ -47,4 +47,26 @@ const saveCar = async (req, res) => {
     }
 }
 
-module.exports = { getAllCars, findCarById, saveCar }
+const updateById = async (req, res) => {
+    const json = {error: '', result: {}}
+    const id = req.params.id;
+    const carro = req.body
+    if(carroService.isCarroFilled(carro)){
+        carro['id'] = id;
+        try{
+            await carroService.updateById(carro)
+            json.result = carro
+        }
+        catch(error){
+            res.statusCode = 400
+            json.error = 'Erro na operação'
+        }
+    }
+    else{
+        res.statusCode = 400
+        json.error = 'Campos não enviados'
+    }
+    res.json(json)
+}
+
+module.exports = { getAllCars, findCarById, saveCar, updateById }

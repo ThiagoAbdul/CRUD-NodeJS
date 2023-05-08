@@ -32,5 +32,10 @@ const saveCar = (carro) => {
     return _query('INSERT INTO carro values (default, ?, ?, ?)', params)
 }
 
-module.exports = { getAllCars, findCarById, saveCar };
+const updateById = (carro) => {
+    const params = [carro.marca, carro.modelo, carro.placa, carro.id] 
+    return _query('UPDATE carro SET marca = ?, modelo = ?, placa = ? WHERE id_carro = ?', params)
+}
+
+module.exports = { getAllCars, findCarById, saveCar, updateById };
 
