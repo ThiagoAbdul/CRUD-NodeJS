@@ -27,5 +27,10 @@ const findCarById = (id) => {
     return _query('SELECT * FROM carro WHERE id_carro = ?', [id])
 }
 
-module.exports = { getAllCars, findCarById };
+const saveCar = (carro) => {
+    const params = [carro.marca, carro.modelo, carro.placa] 
+    return _query('INSERT INTO carro values (default, ?, ?, ?)', params)
+}
+
+module.exports = { getAllCars, findCarById, saveCar };
 

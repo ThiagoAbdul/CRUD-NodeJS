@@ -9,4 +9,9 @@ const findCarById = (id) => {
     return carroRepository.findCarById(id)
 }
 
-module.exports = { getAllCars, findCarById };
+const saveCar = (carro) => {
+    return carroRepository.saveCar(carro)
+}
+
+const isCarroFilled = (carro) => carro.marca != undefined && carro.modelo != undefined && carro.placa != undefined
+module.exports = { getAllCars, findCarById, saveCar, isCarroFilled };

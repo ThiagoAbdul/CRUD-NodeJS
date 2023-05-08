@@ -34,4 +34,17 @@ const findCarById = async (req, res) => {
     res.json(json)
 }
 
-module.exports = { getAllCars, findCarById }
+const saveCar = async (req, res) => {
+    const carro = req.body
+    if(carroService.isCarroFilled(carro)){
+        res.statusCode = 201
+        await carroService.saveCar(carro)
+        res.statusCode = 204
+    }
+    else{
+        res.statusCode = 400
+        res.json({error: 'Campos não enviados'})
+    }
+}
+
+module.exports = { getAllCars, findCarById, saveCar }
