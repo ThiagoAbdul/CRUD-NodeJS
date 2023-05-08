@@ -35,6 +35,7 @@ const findCarById = async (req, res) => {
 }
 
 const saveCar = async (req, res) => {
+    const json = {error: ''}
     const carro = req.body
     if(carroService.isCarroFilled(carro)){
         res.statusCode = 201
@@ -43,9 +44,9 @@ const saveCar = async (req, res) => {
     }
     else{
         res.statusCode = 400
-        res.json({error: 'Campos não enviados'})
+        json.error = 'Campos não enviados'
     }
-    res.json({})
+    res.json(json)
 }
 
 const updateById = async (req, res) => {

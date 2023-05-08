@@ -1,1 +1,0 @@
-Só conectou no mysql pelo fato de eu ter alterado o método de autenticação para mysql_native_password que não é tão inseguro

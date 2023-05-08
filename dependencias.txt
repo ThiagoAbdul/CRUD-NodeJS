@@ -1,6 +1,0 @@
-express
-mysql
-dotenv
-cors
-body-parser
-
