@@ -18,7 +18,7 @@ const getAllCars = async (_, res) => {
 const findCarById = async (req, res) => {
     const json = {error: '', result: {}}
     const id = req.params.id;
-    const carro = (await carroService.findCarById(id))[0]
+    const [carro] = await carroService.findCarById(id)
     if(carro){
         json.result = {
             id: carro.id_carro,
@@ -35,12 +35,17 @@ const findCarById = async (req, res) => {
 }
 
 const saveCar = async (req, res) => {
-    const json = {error: ''}
+    const json = {error: '', result: {}}
     const carro = req.body
     if(carroService.isCarroFilled(carro)){
         res.statusCode = 201
-        await carroService.saveCar(carro)
-        res.statusCode = 204
+        const [carroSalvo] = await carroService.saveCar(carro)
+        json.result = {
+            id: carroSalvo.id_carro,
+            marca: carroSalvo.marca,
+            modelo: carroSalvo.modelo,
+            placa: carroSalvo.placa
+        };
     }
     else{
         res.statusCode = 400

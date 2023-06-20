@@ -1,24 +1,30 @@
 const carroRepository = require('../repositories/carro-repository')
 
 
-const getAllCars = () => {
-    return carroRepository.getAllCars();    
+const getAllCars = async () => {
+    const [cars] = await carroRepository.getAllCars();
+    return cars    
 }
 
-const findCarById = (id) => {
-    return carroRepository.findCarById(id)
+const findCarById = async (id) => {
+    const [car] = await carroRepository.findCarById(id)
+    return car
+
 }
 
-const saveCar = (carro) => {
-    return carroRepository.saveCar(carro)
+const saveCar = async (carro) => {
+    const [resultSet] = await carroRepository.saveCar(carro)
+    const savedCarId = resultSet.insertId;
+    return await findCarById(savedCarId)
 }
 
-const updateById = (carro) => {
-    return carroRepository.updateById(carro)
+const updateById = async (carro) => {
+    return await carroRepository.updateById(carro)
+    
 }
 
-const deleteById = (id) => {
-    return carroRepository.deleteById(id)
+const deleteById = async (id) => {
+    return await carroRepository.deleteById(id)
 }
 
 const isValidId = (id) => {

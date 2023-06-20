@@ -1,0 +1,18 @@
+version: "3.1"
+
+services:
+  db2:
+    image: mysql
+    container_name: mysql_node_api_carros2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_api_carro
+    ports:
+      - "3307:3306"
+    command: --init-file /data/application/init.sql 
+    volumes:
+      - novo_volume:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
+
+volumes:
+  novo_volume:

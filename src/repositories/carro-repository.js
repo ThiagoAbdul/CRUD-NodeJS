@@ -1,44 +1,25 @@
 const db = require('../db');
 
-const getAllCars = () => {
-    return _query('SELECT * FROM carro')
+const getAllCars = async () => {
+    return await db.query('SELECT * FROM carro')
 }
 
-const _query = (sqlCommand, params=null) => {
-    return new Promise((resolve, reject) => {
-        const queryCallback = (error, results) => {
-            if(error){
-                reject(error);
-            }
-            else{
-                resolve(results);
-            }
-        }
-        if(params){
-            db.query(sqlCommand, params, queryCallback);    
-        }
-        else{
-            db.query(sqlCommand, queryCallback);
-        }
-    });
+const findCarById = async (id) => {
+    return await db.query('SELECT * FROM carro WHERE id_carro = ?', [id])
 }
 
-const findCarById = (id) => {
-    return _query('SELECT * FROM carro WHERE id_carro = ?', [id])
-}
-
-const saveCar = (carro) => {
+const saveCar = async (carro) => {
     const params = [carro.marca, carro.modelo, carro.placa] 
-    return _query('INSERT INTO carro values (default, ?, ?, ?)', params)
+    return await db.query('INSERT INTO carro values (default, ?, ?, ?)', params)
 }
 
-const updateById = (carro) => {
+const updateById = async (carro) => {
     const params = [carro.marca, carro.modelo, carro.placa, carro.id] 
-    return _query('UPDATE carro SET marca = ?, modelo = ?, placa = ? WHERE id_carro = ?', params)
+    return await db.query('UPDATE carro SET marca = ?, modelo = ?, placa = ? WHERE id_carro = ?', params)
 }
 
-const deleteById = (id) => {
-    return _query('DELETE FROM carro WHERE id_carro = ?', [id])
+const deleteById = async (id) => {
+    return await db.query('DELETE FROM carro WHERE id_carro = ?', [id])
 }
 
 module.exports = { getAllCars, findCarById, saveCar, updateById, deleteById };

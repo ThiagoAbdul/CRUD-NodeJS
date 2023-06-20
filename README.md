@@ -1,13 +1,5 @@
-## Um CRUD simples em NodeJS
+## Um CRUD simples em NodeJS com ExpressJS e MySQL
 
+### Inicie o container Docker
 
-## Dependências
-- express
-- mysql
-- dotenv
-- cors
-- body-parser
-
-#### Altere a senha no arquivo variaveis.env e rode o init.sql no MySQL
-
-#### Só conecta no mysql se o método de autenticação for nativo, o que pode ser alterado utilizando o comando *alter user 'root'@'localhost' identified with mysql_native_password by 'sua_senha'*
+#### Adicione um arquivo .env com as variáveis de ambiente para definir a conexão como banco e a porta que vai iniciar o servidor
